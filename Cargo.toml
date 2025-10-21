@@ -1,23 +1,23 @@
 [package]
 name = "fungible-token"
 version = "1.0.0"
-authors = ["Near Inc <hello@nearprotocol.com>", "graphite"]
-edition = "2018"
-repository = "https://github.com/graphite/ft-playground"
+authors = ["Near Inc <hello@nearprotocol.com>", "gilcu3"]
+edition = "2021"
+repository = "https://github.com/gilcu3/ft-playground"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-near-sdk = "5.5.0"
-near-contract-standards = "5.5.0"
+near-sdk = "5.17.2"
+near-contract-standards = "5.17.2"
 
 [dev-dependencies] 
-near-sdk = { version = "5.5.0", features = ["unit-testing"] }
-near-workspaces = { version = "0.14.1", features = ["unstable"] }
-anyhow = "1.0"
-tokio = { version = "1.41.0", features = ["full"] }
-cargo-near-build = "0.3.2"
+near-sdk = { version = "5.17.2", features = ["unit-testing"] }
+near-workspaces = { version = "0.21.0", features = ["unstable"] }
+anyhow = "1.0.100"
+tokio = { version = "1.48.0", features = ["full"] }
+cargo-near-build = "0.9.0"
 
 [package.metadata.near.reproducible_build]
 image = "sourcescan/cargo-near:0.17.0-rust-1.86.0n"

@@ -28,7 +28,8 @@ use near_sdk::borsh::BorshSerialize;
 use near_sdk::collections::LazyOption;
 use near_sdk::json_types::U128;
 use near_sdk::{
-    assert_one_yocto, env, log, near, require, AccountId, BorshStorageKey, NearToken, PanicOnDefault, PromiseOrValue,
+    assert_one_yocto, env, log, near, require, AccountId, BorshStorageKey, NearToken,
+    PanicOnDefault, PromiseOrValue,
 };
 
 #[derive(PanicOnDefault)]
@@ -381,7 +382,7 @@ mod tests {
             .attached_deposit(NearToken::from_yoctonear(1))
             .build());
 
-        assert_eq!(contract.storage_unregister(None), true);
+        assert!(contract.storage_unregister(None));
 
         assert!(contract.storage_balance_of(user1()).is_none());
     }
@@ -418,7 +419,7 @@ mod tests {
             .build());
 
         // "false" indicates that the account wasn't registered
-        assert_eq!(contract.storage_unregister(None), false);
+        assert!(!contract.storage_unregister(None));
     }
 
     #[should_panic]
@@ -479,11 +480,14 @@ mod tests {
 
         // force to unregister no matter what
         // this reduces total supply because user's tokens are burnt
-        assert_eq!(contract.storage_unregister(Some(true)), true);
+        assert!(contract.storage_unregister(Some(true)));
 
         assert!(contract.storage_balance_of(user1()).is_none());
         assert_eq!(contract.ft_balance_of(user1()).0, 0);
-        assert_eq!(contract.ft_total_supply().0, INITIAL_BALANCE - transfer_amount);
+        assert_eq!(
+            contract.ft_total_supply().0,
+            INITIAL_BALANCE - transfer_amount
+        );
     }
 
     #[test]
